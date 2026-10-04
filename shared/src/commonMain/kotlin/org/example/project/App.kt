@@ -17,8 +17,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import haircutprank.shared.generated.resources.Res
 import haircutprank.shared.generated.resources.compose_multiplatform
+import org.example.project.presentation.navigation.AppNavHost
 import org.example.project.presentation.screens.intro.IntroScreen
 import org.example.project.presentation.screens.splash.SplashScreen
 import org.jetbrains.compose.resources.painterResource
@@ -28,45 +30,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     MaterialTheme {
-        var isSplashFinished by remember { mutableStateOf(false) }
-        var showIntro by remember { mutableStateOf(false) }
-
-        if (!isSplashFinished) {
-            SplashScreen(
-                onNavigateNext = { navigationToIntro ->
-                    showIntro = navigationToIntro
-                    isSplashFinished = true
-                }
-            )
-        } else if (showIntro) {
-            IntroScreen(
-                onNavigateToMain = {
-                    showIntro = false
-                }
-            )
-        } else {
-            var showContent by remember { mutableStateOf(false) }
-            Column(
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.primaryContainer)
-                    .safeContentPadding()
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Button(onClick = { showContent = !showContent }) {
-                    Text("Click me!")
-                }
-                AnimatedVisibility(showContent) {
-                    val greeting = remember { Greeting().greet() }
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Image(painterResource(Res.drawable.compose_multiplatform), null)
-                        Text("Compose: $greeting")
-                    }
-                }
-            }
-        }
+        val navController = rememberNavController()
+        AppNavHost(navController = navController)
     }
 }
