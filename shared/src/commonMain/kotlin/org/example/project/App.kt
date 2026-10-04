@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import haircutprank.shared.generated.resources.Res
 import haircutprank.shared.generated.resources.compose_multiplatform
+import org.example.project.presentation.screens.intro.IntroScreen
 import org.example.project.presentation.screens.splash.SplashScreen
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -28,11 +29,19 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     MaterialTheme {
         var isSplashFinished by remember { mutableStateOf(false) }
+        var showIntro by remember { mutableStateOf(false) }
 
         if (!isSplashFinished) {
             SplashScreen(
                 onNavigateNext = { navigationToIntro ->
+                    showIntro = navigationToIntro
                     isSplashFinished = true
+                }
+            )
+        } else if (showIntro) {
+            IntroScreen(
+                onNavigateToMain = {
+                    showIntro = false
                 }
             )
         } else {

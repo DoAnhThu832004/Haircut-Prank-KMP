@@ -1,12 +1,15 @@
 package org.example.project
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import org.example.project.data.local.pref.getAppPreferences
 
 class SharedLogicDesktopTest {
 
     @Test
-    fun example() {
-        assertEquals(3, 1 + 2)
+    fun testPreferences() {
+        val prefs = getAppPreferences()
+        println(">>> TEST PREFERENCES isIntroDone initially: ${prefs.isIntroDone()}")
+        assertFalse(prefs.isIntroDone())
     }
 }

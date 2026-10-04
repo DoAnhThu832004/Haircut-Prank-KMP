@@ -11,9 +11,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.example.project.data.repository.UserPreferencesRepositoryImpl
+import org.example.project.domain.repository.UserPreferencesRepository
 import kotlin.time.TimeSource
 
-class SplashViewModel : ViewModel() {
+class SplashViewModel(
+    private val userPreferencesRepository: UserPreferencesRepository = UserPreferencesRepositoryImpl()
+) : ViewModel() {
     private val _uiState = MutableStateFlow<SplashUiState>(SplashUiState.Loading)
     val uiState: StateFlow<SplashUiState> = _uiState.asStateFlow()
 
@@ -36,7 +40,8 @@ class SplashViewModel : ViewModel() {
 
             val result = withContext(Dispatchers.Default) {
                 runCatching {
-                    true
+                    val isDone = userPreferencesRepository.isIntroDone()
+                    !isDone
                 }
             }
 
