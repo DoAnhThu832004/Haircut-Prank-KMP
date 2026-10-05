@@ -7,4 +7,8 @@
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="start">Start</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorites</string>
+    <string name="settings">Settings</string>
+    <string name="no_favorite_sounds">No favorite sounds yet!</string>
 </resources>

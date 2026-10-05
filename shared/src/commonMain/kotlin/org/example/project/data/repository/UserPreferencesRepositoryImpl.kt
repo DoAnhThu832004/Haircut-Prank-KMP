@@ -9,4 +9,8 @@ class UserPreferencesRepositoryImpl(
 ) : UserPreferencesRepository {
     override fun isIntroDone(): Boolean = appPreferences.isIntroDone()
     override fun setIntroDone(done: Boolean) = appPreferences.setIntroDone(done)
+    override fun isNewCategoryViewed(categoryKey: String): Boolean =
+        appPreferences.isNewCategoryViewed(categoryKey)
+    override fun markNewCategoryViewed(categoryKey: String) =
+        appPreferences.markNewCategoryViewed(categoryKey)
 }
