@@ -34,6 +34,9 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.uiTooling)
         }
+        jvmMain.dependencies {
+            implementation("javazoom:jlayer:1.0.1")
+        }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)

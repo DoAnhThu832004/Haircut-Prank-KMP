@@ -13,4 +13,8 @@ class UserPreferencesRepositoryImpl(
         appPreferences.isNewCategoryViewed(categoryKey)
     override fun markNewCategoryViewed(categoryKey: String) =
         appPreferences.markNewCategoryViewed(categoryKey)
+    override fun isSoundKnown(key: String): Boolean =
+        appPreferences.isSoundKnown(key)
+    override fun markSoundsKnown(keys: Collection<String>) =
+        appPreferences.markSoundsKnown(keys)
 }

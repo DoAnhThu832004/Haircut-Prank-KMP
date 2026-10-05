@@ -14,6 +14,7 @@ class AndroidAppPreferences(context: Context) : AppPreferences {
     companion object {
         private const val KEY_INTRO_DONE = "intro_done"
         private const val PREFIX_CATEGORY_VIEWED = "cat_viewed_"
+        private const val PREFIX_SOUND_KNOWN = "sound_known_"
     }
 
     override fun isIntroDone(): Boolean = prefs.getBoolean(KEY_INTRO_DONE, false)
@@ -27,6 +28,15 @@ class AndroidAppPreferences(context: Context) : AppPreferences {
 
     override fun markNewCategoryViewed(categoryKey: String) {
         prefs.edit().putBoolean(PREFIX_CATEGORY_VIEWED + categoryKey, true).apply()
+    }
+
+    override fun isSoundKnown(key: String): Boolean =
+        prefs.getBoolean(PREFIX_SOUND_KNOWN + key, false)
+
+    override fun markSoundsKnown(keys: Collection<String>) {
+        val editor = prefs.edit()
+        keys.forEach { editor.putBoolean(PREFIX_SOUND_KNOWN + it, true) }
+        editor.apply()
     }
 }
 

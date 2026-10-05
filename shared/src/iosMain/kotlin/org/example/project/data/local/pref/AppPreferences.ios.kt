@@ -8,6 +8,7 @@ class IOSAppPreferences : AppPreferences {
     companion object {
         private const val KEY_INTRO_DONE = "intro_done"
         private const val PREFIX_CATEGORY_VIEWED = "cat_viewed_"
+        private const val PREFIX_SOUND_KNOWN = "sound_known_"
     }
 
     override fun isIntroDone(): Boolean = defaults.boolForKey(KEY_INTRO_DONE)
@@ -21,6 +22,13 @@ class IOSAppPreferences : AppPreferences {
 
     override fun markNewCategoryViewed(categoryKey: String) {
         defaults.setBool(true, forKey = PREFIX_CATEGORY_VIEWED + categoryKey)
+    }
+
+    override fun isSoundKnown(key: String): Boolean =
+        defaults.boolForKey(PREFIX_SOUND_KNOWN + key)
+
+    override fun markSoundsKnown(keys: Collection<String>) {
+        keys.forEach { defaults.setBool(true, forKey = PREFIX_SOUND_KNOWN + it) }
     }
 }
 
